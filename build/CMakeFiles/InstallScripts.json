@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/mnt/hgfs/share/GitHub/Launcher_Box/build/cmake_install.cmake",
+		"/mnt/hgfs/share/GitHub/Launcher_Box/build/lvgl/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
