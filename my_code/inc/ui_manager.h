@@ -1,8 +1,8 @@
-/*ui_manager.h*/
 #ifndef UI_MANAGER_H
 #define UI_MANAGER_H
 
 #include "lvgl/lvgl.h"
+#include <stdbool.h>
 
 /**
  * @brief 初始化UI系统（LVGL库+主界面布局）
@@ -20,5 +20,10 @@ void ui_manager_on_list_item_selected(lv_event_t *e);
  * @param e LVGL事件对象（包含事件上下文）
  */
 void ui_manager_on_launch_btn_clicked(lv_event_t *e);
+
+/**
+ * @brief 检查运行中的应用状态
+ */
+void ui_manager_check_app_status(void);
 
 #endif // UI_MANAGER_H
