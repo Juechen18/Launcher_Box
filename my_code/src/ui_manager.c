@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <pthread.h>
 #include <stdlib.h>
 
 // UI组件
@@ -26,21 +25,6 @@ static bool g_app_running = false;
 // 文本样式
 static lv_style_t g_text_style;
 
-// 监控线程函数
-static void *app_monitor_thread(void *arg)
-{
-    int status;
-    pid_t pid = (pid_t)(intptr_t)arg;
-
-    waitpid(pid, &status, 0);
-
-    g_app_running = false;
-    g_running_pid = -1;
-    lv_obj_clear_flag(g_launch_btn, LV_OBJ_FLAG_HIDDEN);
-
-    return NULL;
-}
-
 static void update_detail_panel(const AppInfo *app)
 {
     if (!app)
@@ -54,7 +38,15 @@ static void update_detail_panel(const AppInfo *app)
 
     // 设置文本
     lv_label_set_text(g_detail_name_label, app->name);
-    lv_label_set_text(g_detail_desc_label, app->description);
+
+    if (g_app_running)
+    {
+        lv_label_set_text(g_detail_desc_label, "应用正在运行中...");
+    }
+    else
+    {
+        lv_label_set_text(g_detail_desc_label, app->description);
+    }
 
     // 根据运行状态更新按钮
     if (g_app_running)
@@ -161,28 +153,20 @@ void ui_manager_on_launch_btn_clicked(lv_event_t *e)
         return;
 
     const AppInfo *app = app_list_get_by_index(g_selected_app_idx);
-    if (!app)
+    if (!app || app->exec_path[0] == '\0')
         return;
 
-    // 隐藏按钮
-    lv_obj_add_flag(g_launch_btn, LV_OBJ_FLAG_HIDDEN);
-    g_app_running = true;
-
-    // 启动子程序
-    pid_t pid = fork();
-    if (pid == 0)
-    {
-        char *argv[] = {(char *)app->exec_path, NULL};
-        execvp(app->exec_path, argv);
-        exit(EXIT_FAILURE);
-    }
-    else if (pid > 0)
+    pid_t pid;
+    if (app_launcher_start(app->exec_path, &pid) == 0)
     {
         g_running_pid = pid;
-        // 创建监控线程
-        pthread_t tid;
-        pthread_create(&tid, NULL, app_monitor_thread, (void *)(intptr_t)pid);
-        pthread_detach(tid);
+        g_app_running = true;
+        update_detail_panel(app);
+    }
+    else
+    {
+        lv_label_set_text(g_detail_desc_label, "启动应用失败");
+        printf("%s\n", app->exec_path);
     }
 }
 
@@ -196,7 +180,16 @@ void ui_manager_check_app_status(void)
         {
             g_app_running = false;
             g_running_pid = -1;
-            lv_obj_clear_flag(g_launch_btn, LV_OBJ_FLAG_HIDDEN);
+            if (g_selected_app_idx != -1)
+            {
+                const AppInfo *app = app_list_get_by_index(g_selected_app_idx);
+                update_detail_panel(app);
+            }
+        }
+        else if (result == -1)
+        {
+            g_app_running = false;
+            g_running_pid = -1;
         }
     }
 }

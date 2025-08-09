@@ -775,7 +775,6 @@ CMakeFiles/launcher.dir/mouse_cursor_icon.c.o: /mnt/hgfs/share/GitHub/Launcher_B
 
 CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o: /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_launcher.c \
   /mnt/hgfs/share/GitHub/Launcher_Box/my_code/inc/app_launcher.h \
-  /mnt/hgfs/share/GitHub/Launcher_Box/my_code/inc/utils.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/_G_config.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/alloca.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/asm/sigcontext.h \
@@ -1226,6 +1225,7 @@ CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o: /mnt/hgfs/share/GitHub/Launc
   /mnt/hgfs/share/GitHub/Launcher_Box/my_code/inc/ui_manager.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/_G_config.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/alloca.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/asm/sigcontext.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/byteswap-16.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/byteswap.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/confname.h \
@@ -1234,7 +1234,13 @@ CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o: /mnt/hgfs/share/GitHub/Launc
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/posix_opt.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/pthreadtypes.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/select.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/sigaction.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/sigcontext.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/siginfo.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/signum.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/sigset.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/sigstack.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/sigthread.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/stdio_lim.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/stdlib-float.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/bits/sys_errlist.h \
@@ -1252,6 +1258,7 @@ CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o: /mnt/hgfs/share/GitHub/Launc
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/gnu/stubs.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/inttypes.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/libio.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/signal.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/stdc-predef.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/stdint.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/stdio.h \
@@ -1261,6 +1268,8 @@ CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o: /mnt/hgfs/share/GitHub/Launc
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/sys/select.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/sys/sysmacros.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/sys/types.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/sys/ucontext.h \
+  /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/sys/wait.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/time.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/unistd.h \
   /usr/local/arm/6.5.0/arm-linux-gnueabi/libc/usr/include/wchar.h \
@@ -1479,8 +1488,6 @@ CMakeFiles/launcher.dir/my_code/src/utils.c.o: /mnt/hgfs/share/GitHub/Launcher_B
 /mnt/hgfs/share/GitHub/Launcher_Box/lvgl/src/draw/lv_draw.h:
 
 /mnt/hgfs/share/GitHub/Launcher_Box/main.c:
-
-/mnt/hgfs/share/GitHub/Launcher_Box/my_code/inc/utils.h:
 
 /mnt/hgfs/share/GitHub/Launcher_Box/lvgl/src/widgets/image/lv_image.h:
 

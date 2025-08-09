@@ -8,7 +8,7 @@ int main()
     /************************** 1. LVGL库初始化 **************************/
     lv_init(); // 必须先初始化LVGL，否则无法创建显示/输入设备
 
-    lv_fs_posix_init();  // 注册POSIX文件系统驱动（处理本地文件路径）
+    lv_fs_posix_init(); // 注册POSIX文件系统驱动（处理本地文件路径）
 
     /************************** 2. 显示设备初始化（Framebuffer） **************************/
     lv_display_t *disp = lv_linux_fbdev_create(); // 创建Linux Framebuffer显示设备
@@ -31,8 +31,9 @@ int main()
     /************************** 5. LVGL主循环（界面刷新与事件处理） **************************/
     while (1)
     {
-        lv_timer_handler(); // 处理LVGL内部事件（动画、输入、定时器）
-        usleep(5000);       // 睡眠5ms，降低CPU占用（可调整）
+        lv_timer_handler();            // 处理LVGL内部事件（动画、输入、定时器）
+        ui_manager_check_app_status(); // 新增：定期检查应用状态
+        usleep(5000);                  // 睡眠5ms，降低CPU占用（可调整）
     }
 
     return 0;
