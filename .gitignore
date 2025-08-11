@@ -53,3 +53,6 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# 忽略 doxygen 目录（适用于 Unix/Windows）
+/doxygen/

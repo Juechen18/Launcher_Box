@@ -287,53 +287,53 @@ mouse_cursor_icon.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/mouse_cursor_icon.c.s
 .PHONY : mouse_cursor_icon.c.s
 
-my_code/src/app_launcher.o: my_code/src/app_launcher.c.o
-.PHONY : my_code/src/app_launcher.o
+my_code/src/config.o: my_code/src/config.c.o
+.PHONY : my_code/src/config.o
 
 # target to build an object file
-my_code/src/app_launcher.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o
-.PHONY : my_code/src/app_launcher.c.o
+my_code/src/config.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/config.c.o
+.PHONY : my_code/src/config.c.o
 
-my_code/src/app_launcher.i: my_code/src/app_launcher.c.i
-.PHONY : my_code/src/app_launcher.i
+my_code/src/config.i: my_code/src/config.c.i
+.PHONY : my_code/src/config.i
 
 # target to preprocess a source file
-my_code/src/app_launcher.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/app_launcher.c.i
-.PHONY : my_code/src/app_launcher.c.i
+my_code/src/config.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/config.c.i
+.PHONY : my_code/src/config.c.i
 
-my_code/src/app_launcher.s: my_code/src/app_launcher.c.s
-.PHONY : my_code/src/app_launcher.s
+my_code/src/config.s: my_code/src/config.c.s
+.PHONY : my_code/src/config.s
 
 # target to generate assembly for a file
-my_code/src/app_launcher.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/app_launcher.c.s
-.PHONY : my_code/src/app_launcher.c.s
+my_code/src/config.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/config.c.s
+.PHONY : my_code/src/config.c.s
 
-my_code/src/app_list.o: my_code/src/app_list.c.o
-.PHONY : my_code/src/app_list.o
+my_code/src/launcher.o: my_code/src/launcher.c.o
+.PHONY : my_code/src/launcher.o
 
 # target to build an object file
-my_code/src/app_list.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/app_list.c.o
-.PHONY : my_code/src/app_list.c.o
+my_code/src/launcher.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/launcher.c.o
+.PHONY : my_code/src/launcher.c.o
 
-my_code/src/app_list.i: my_code/src/app_list.c.i
-.PHONY : my_code/src/app_list.i
+my_code/src/launcher.i: my_code/src/launcher.c.i
+.PHONY : my_code/src/launcher.i
 
 # target to preprocess a source file
-my_code/src/app_list.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/app_list.c.i
-.PHONY : my_code/src/app_list.c.i
+my_code/src/launcher.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/launcher.c.i
+.PHONY : my_code/src/launcher.c.i
 
-my_code/src/app_list.s: my_code/src/app_list.c.s
-.PHONY : my_code/src/app_list.s
+my_code/src/launcher.s: my_code/src/launcher.c.s
+.PHONY : my_code/src/launcher.s
 
 # target to generate assembly for a file
-my_code/src/app_list.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/app_list.c.s
-.PHONY : my_code/src/app_list.c.s
+my_code/src/launcher.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/launcher.c.s
+.PHONY : my_code/src/launcher.c.s
 
 my_code/src/ui_manager.o: my_code/src/ui_manager.c.o
 .PHONY : my_code/src/ui_manager.o
@@ -407,12 +407,12 @@ help:
 	@echo "... mouse_cursor_icon.o"
 	@echo "... mouse_cursor_icon.i"
 	@echo "... mouse_cursor_icon.s"
-	@echo "... my_code/src/app_launcher.o"
-	@echo "... my_code/src/app_launcher.i"
-	@echo "... my_code/src/app_launcher.s"
-	@echo "... my_code/src/app_list.o"
-	@echo "... my_code/src/app_list.i"
-	@echo "... my_code/src/app_list.s"
+	@echo "... my_code/src/config.o"
+	@echo "... my_code/src/config.i"
+	@echo "... my_code/src/config.s"
+	@echo "... my_code/src/launcher.o"
+	@echo "... my_code/src/launcher.i"
+	@echo "... my_code/src/launcher.s"
 	@echo "... my_code/src/ui_manager.o"
 	@echo "... my_code/src/ui_manager.i"
 	@echo "... my_code/src/ui_manager.s"

@@ -1,40 +1,81 @@
-/*main.c*/
-#include "lvgl/lvgl.h"  // LVGL核心库
-#include "ui_manager.h" // UI层：界面布局与交互
-#include <unistd.h>     // 用于主循环睡眠（usleep）
+#include "ui_manager.h"
+#include "launcher.h"
+#include "utils.h"
+#include "config.h"
+#include <unistd.h>
+#include <signal.h>
+#include <semaphore.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
-int main()
+static sem_t *g_sem = NULL;
+/* signal-safe 标志：由 signal handler 设置，主循环读取并清零 */
+volatile sig_atomic_t g_child_exited_flag = 0;
+
+static void sigchld_handler(int signo)
 {
-    /************************** 1. LVGL库初始化 **************************/
-    lv_init(); // 必须先初始化LVGL，否则无法创建显示/输入设备
-
-    lv_fs_posix_init(); // 注册POSIX文件系统驱动（处理本地文件路径）
-
-    /************************** 2. 显示设备初始化（Framebuffer） **************************/
-    lv_display_t *disp = lv_linux_fbdev_create(); // 创建Linux Framebuffer显示设备
-    if (!disp)
+    int status;
+    pid_t pid;
+    /* 回收所有已退出的子进程 */
+    while ((pid = waitpid(-1, &status, WNOHANG)) > 0)
     {
-        return 1;
-    } // 简单错误处理（无日志）
-    lv_linux_fbdev_set_file(disp, "/dev/fb0"); // 指定Framebuffer设备文件（如/dev/fb0）
+        /* sem_post 是 POSIX 定义的 async-signal-safe，可以在 handler 中调用 */
+        if (g_sem)
+            sem_post(g_sem);
+        g_child_exited_flag = 1; /* 在主循环中处理 UI 恢复 */
+    }
+}
 
-    /************************** 3. 输入设备初始化（鼠标/触摸） **************************/
-    lv_indev_t *indev = lv_evdev_create(LV_INDEV_TYPE_POINTER, "/dev/input/event0"); // 创建输入设备（指针类型）
-    if (!indev)
+int main(void)
+{
+    /* 1. 初始化 LVGL（确保 lv_drivers 已正确集成）*/
+    lv_init();
+    lv_display_t *disp = lv_linux_fbdev_create();
+    lv_linux_fbdev_set_file(disp, "/dev/fb0");
+    lv_indev_t *indev = lv_evdev_create(LV_INDEV_TYPE_POINTER, "/dev/input/event0");
+
+    /* 2. 初始化命名信号量 */
+    g_sem = sem_open("/launcher_sem", O_CREAT, 0666, 1);
+    if (g_sem == SEM_FAILED)
     {
-        return 1;
-    } // 简单错误处理（无日志）
+        perror("sem_open");
+        return -1;
+    }
+    launcher_set_semaphore(g_sem);
 
-    /************************** 4. 初始化UI界面（布局+交互） **************************/
-    ui_manager_init(); // UI层负责：创建主界面（列表+详情面板）、绑定事件（点击/选中）
-
-    /************************** 5. LVGL主循环（界面刷新与事件处理） **************************/
-    while (1)
+    /* 3. 安装 SIGCHLD 处理器 */
+    struct sigaction sa;
+    sa.sa_handler = sigchld_handler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = SA_RESTART | SA_NOCLDSTOP;
+    if (sigaction(SIGCHLD, &sa, NULL) == -1)
     {
-        lv_timer_handler();            // 处理LVGL内部事件（动画、输入、定时器）
-        ui_manager_check_app_status(); // 新增：定期检查应用状态
-        usleep(5000);                  // 睡眠5ms，降低CPU占用（可调整）
+        perror("sigaction");
     }
 
+    /* 4. 创建 UI */
+    ui_create_all();
+    show_menu_screen();
+
+    /* 5. 主循环：处理 LVGL 任务，并在检测到子进程退出后恢复 UI（安全） */
+    while (1)
+    {
+        lv_timer_handler();
+
+        if (g_child_exited_flag)
+        {
+            g_child_exited_flag = 0;
+            ui_on_child_exit();
+        }
+
+        usleep(5000);
+    }
+
+    /* 清理（通常不可达） */
+    sem_close(g_sem);
+    sem_unlink("/launcher_sem");
     return 0;
 }

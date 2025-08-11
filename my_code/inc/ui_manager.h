@@ -1,29 +1,29 @@
+/**
+ * @file ui_manager.h
+ * @brief 用户界面管理头文件
+ * 
+ * 提供创建和管理启动器用户界面的函数
+ */
+
 #ifndef UI_MANAGER_H
 #define UI_MANAGER_H
 
-#include "lvgl/lvgl.h"
-#include <stdbool.h>
+#include "launcher.h"
+#include <lvgl.h>
 
 /**
- * @brief 初始化UI系统（LVGL库+主界面布局）
+ * @brief 创建所有UI组件
  */
-void ui_manager_init(void);
+void ui_create_all(void);
 
 /**
- * @brief 应用列表项选中事件回调
- * @param e LVGL事件对象（包含事件上下文）
+ * @brief 显示菜单界面
  */
-void ui_manager_on_list_item_selected(lv_event_t *e);
+void show_menu_screen(void);
 
 /**
- * @brief 启动按钮点击事件回调
- * @param e LVGL事件对象（包含事件上下文）
+ * @brief 处理子进程退出事件
  */
-void ui_manager_on_launch_btn_clicked(lv_event_t *e);
+void ui_on_child_exit(void);
 
-/**
- * @brief 检查运行中的应用状态
- */
-void ui_manager_check_app_status(void);
-
-#endif // UI_MANAGER_H
+#endif

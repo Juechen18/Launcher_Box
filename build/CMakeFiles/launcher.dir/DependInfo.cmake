@@ -10,8 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/hgfs/share/GitHub/Launcher_Box/main.c" "CMakeFiles/launcher.dir/main.c.o" "gcc" "CMakeFiles/launcher.dir/main.c.o.d"
   "/mnt/hgfs/share/GitHub/Launcher_Box/mouse_cursor_icon.c" "CMakeFiles/launcher.dir/mouse_cursor_icon.c.o" "gcc" "CMakeFiles/launcher.dir/mouse_cursor_icon.c.o.d"
-  "/mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_launcher.c" "CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o" "gcc" "CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o.d"
-  "/mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_list.c" "CMakeFiles/launcher.dir/my_code/src/app_list.c.o" "gcc" "CMakeFiles/launcher.dir/my_code/src/app_list.c.o.d"
+  "/mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/config.c" "CMakeFiles/launcher.dir/my_code/src/config.c.o" "gcc" "CMakeFiles/launcher.dir/my_code/src/config.c.o.d"
+  "/mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/launcher.c" "CMakeFiles/launcher.dir/my_code/src/launcher.c.o" "gcc" "CMakeFiles/launcher.dir/my_code/src/launcher.c.o.d"
   "/mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/ui_manager.c" "CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o" "gcc" "CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o.d"
   "/mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/utils.c" "CMakeFiles/launcher.dir/my_code/src/utils.c.o" "gcc" "CMakeFiles/launcher.dir/my_code/src/utils.c.o.d"
   )

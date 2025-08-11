@@ -100,33 +100,33 @@ CMakeFiles/launcher.dir/mouse_cursor_icon.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/launcher.dir/mouse_cursor_icon.c.s"
 	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/GitHub/Launcher_Box/mouse_cursor_icon.c -o CMakeFiles/launcher.dir/mouse_cursor_icon.c.s
 
-CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o: CMakeFiles/launcher.dir/flags.make
-CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o: /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_launcher.c
-CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o: CMakeFiles/launcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/GitHub/Launcher_Box/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o"
-	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o -MF CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o.d -o CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o -c /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_launcher.c
+CMakeFiles/launcher.dir/my_code/src/config.c.o: CMakeFiles/launcher.dir/flags.make
+CMakeFiles/launcher.dir/my_code/src/config.c.o: /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/config.c
+CMakeFiles/launcher.dir/my_code/src/config.c.o: CMakeFiles/launcher.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/GitHub/Launcher_Box/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/launcher.dir/my_code/src/config.c.o"
+	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/launcher.dir/my_code/src/config.c.o -MF CMakeFiles/launcher.dir/my_code/src/config.c.o.d -o CMakeFiles/launcher.dir/my_code/src/config.c.o -c /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/config.c
 
-CMakeFiles/launcher.dir/my_code/src/app_launcher.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/launcher.dir/my_code/src/app_launcher.c.i"
-	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_launcher.c > CMakeFiles/launcher.dir/my_code/src/app_launcher.c.i
+CMakeFiles/launcher.dir/my_code/src/config.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/launcher.dir/my_code/src/config.c.i"
+	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/config.c > CMakeFiles/launcher.dir/my_code/src/config.c.i
 
-CMakeFiles/launcher.dir/my_code/src/app_launcher.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/launcher.dir/my_code/src/app_launcher.c.s"
-	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_launcher.c -o CMakeFiles/launcher.dir/my_code/src/app_launcher.c.s
+CMakeFiles/launcher.dir/my_code/src/config.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/launcher.dir/my_code/src/config.c.s"
+	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/config.c -o CMakeFiles/launcher.dir/my_code/src/config.c.s
 
-CMakeFiles/launcher.dir/my_code/src/app_list.c.o: CMakeFiles/launcher.dir/flags.make
-CMakeFiles/launcher.dir/my_code/src/app_list.c.o: /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_list.c
-CMakeFiles/launcher.dir/my_code/src/app_list.c.o: CMakeFiles/launcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/GitHub/Launcher_Box/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/launcher.dir/my_code/src/app_list.c.o"
-	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/launcher.dir/my_code/src/app_list.c.o -MF CMakeFiles/launcher.dir/my_code/src/app_list.c.o.d -o CMakeFiles/launcher.dir/my_code/src/app_list.c.o -c /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_list.c
+CMakeFiles/launcher.dir/my_code/src/launcher.c.o: CMakeFiles/launcher.dir/flags.make
+CMakeFiles/launcher.dir/my_code/src/launcher.c.o: /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/launcher.c
+CMakeFiles/launcher.dir/my_code/src/launcher.c.o: CMakeFiles/launcher.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/GitHub/Launcher_Box/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/launcher.dir/my_code/src/launcher.c.o"
+	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/launcher.dir/my_code/src/launcher.c.o -MF CMakeFiles/launcher.dir/my_code/src/launcher.c.o.d -o CMakeFiles/launcher.dir/my_code/src/launcher.c.o -c /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/launcher.c
 
-CMakeFiles/launcher.dir/my_code/src/app_list.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/launcher.dir/my_code/src/app_list.c.i"
-	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_list.c > CMakeFiles/launcher.dir/my_code/src/app_list.c.i
+CMakeFiles/launcher.dir/my_code/src/launcher.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/launcher.dir/my_code/src/launcher.c.i"
+	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/launcher.c > CMakeFiles/launcher.dir/my_code/src/launcher.c.i
 
-CMakeFiles/launcher.dir/my_code/src/app_list.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/launcher.dir/my_code/src/app_list.c.s"
-	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/app_list.c -o CMakeFiles/launcher.dir/my_code/src/app_list.c.s
+CMakeFiles/launcher.dir/my_code/src/launcher.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/launcher.dir/my_code/src/launcher.c.s"
+	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/launcher.c -o CMakeFiles/launcher.dir/my_code/src/launcher.c.s
 
 CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o: CMakeFiles/launcher.dir/flags.make
 CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o: /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/ui_manager.c
@@ -160,8 +160,8 @@ CMakeFiles/launcher.dir/my_code/src/utils.c.s: cmake_force
 launcher_OBJECTS = \
 "CMakeFiles/launcher.dir/main.c.o" \
 "CMakeFiles/launcher.dir/mouse_cursor_icon.c.o" \
-"CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o" \
-"CMakeFiles/launcher.dir/my_code/src/app_list.c.o" \
+"CMakeFiles/launcher.dir/my_code/src/config.c.o" \
+"CMakeFiles/launcher.dir/my_code/src/launcher.c.o" \
 "CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o" \
 "CMakeFiles/launcher.dir/my_code/src/utils.c.o"
 
@@ -170,8 +170,8 @@ launcher_EXTERNAL_OBJECTS =
 
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/main.c.o
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/mouse_cursor_icon.c.o
-/mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/app_launcher.c.o
-/mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/app_list.c.o
+/mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/config.c.o
+/mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/launcher.c.o
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/utils.c.o
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/build.make

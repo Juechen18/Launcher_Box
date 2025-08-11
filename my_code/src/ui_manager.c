@@ -1,195 +1,206 @@
+/**
+ * @file ui_manager.c
+ * @brief 用户界面管理实现
+ */
+
 #include "ui_manager.h"
-#include "app_list.h"
-#include "app_launcher.h"
-#include "lvgl/lvgl.h"
+#include "utils.h"
+#include "config.h"
 #include "lv_mygec_font.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdio.h>
 
-// UI组件
-static lv_obj_t *g_main_screen;
-static lv_obj_t *g_app_list;
-static lv_obj_t *g_detail_panel;
-static lv_obj_t *g_detail_icon;
-static lv_obj_t *g_detail_name_label;
-static lv_obj_t *g_detail_desc_label;
-static lv_obj_t *g_launch_btn;
-static int g_selected_app_idx = -1;
+static lv_obj_t *menu_list;             /**< 左侧菜单列表 */
+static lv_obj_t *right_panel;           /**< 右侧内容面板 */
+static lv_obj_t *title_label;           /**< 标题标签 */
+static lv_obj_t *desc_label;            /**< 描述标签 */
+static lv_obj_t *content_label;         /**< 内容显示标签 */
+static project_info_t *projects = NULL; /**< 项目列表 */
+static int project_count = 0;           /**< 项目数量 */
+static int selected_index = -1;         /**< 当前选中项目索引 */
 
-// 状态管理
-static pid_t g_running_pid = -1;
-static bool g_app_running = false;
+/* 内部函数声明 */
+static void show_project_info(int idx);
+static void hide_ui(void);
+static void show_ui(void);
+static void create_title_label(void);
+static void create_menu_list(void);
 
-// 文本样式
-static lv_style_t g_text_style;
-
-static void update_detail_panel(const AppInfo *app)
+/* 事件回调函数 */
+static void project_btn_event_cb(lv_event_t *e)
 {
-    if (!app)
+    int idx = (int)(intptr_t)lv_event_get_user_data(e);
+    if (idx < 0 || idx >= project_count)
         return;
-
-    // 设置图标（仅当路径有效时）
-    if (app->icon_path[0] != '\0')
-    {
-        lv_img_set_src(g_detail_icon, app->icon_path);
-    }
-
-    // 设置文本
-    lv_label_set_text(g_detail_name_label, app->name);
-
-    if (g_app_running)
-    {
-        lv_label_set_text(g_detail_desc_label, "应用正在运行中...");
-    }
-    else
-    {
-        lv_label_set_text(g_detail_desc_label, app->description);
-    }
-
-    // 根据运行状态更新按钮
-    if (g_app_running)
-    {
-        lv_obj_add_flag(g_launch_btn, LV_OBJ_FLAG_HIDDEN);
-    }
-    else
-    {
-        lv_obj_clear_flag(g_launch_btn, LV_OBJ_FLAG_HIDDEN);
-    }
-
-    lv_obj_clear_flag(g_detail_panel, LV_OBJ_FLAG_HIDDEN);
+    selected_index = idx;
+    show_project_info(idx);
 }
 
-static void create_main_layout(void)
+static void start_btn_event_cb(lv_event_t *e)
 {
-    // 初始化路径
-    path_init();
+    int idx = (int)(intptr_t)lv_event_get_user_data(e);
+    if (idx < 0 || idx >= project_count)
+        return;
+    hide_ui();
+    launcher_start_project(projects[idx].exec_path);
+}
 
-    // 初始化样式
-    lv_style_init(&g_text_style);
-    lv_style_set_text_font(&g_text_style, &lv_mygec_font);
+static void exit_btn_event_cb(lv_event_t *e)
+{
+    exit(0);
+}
 
-    // 主屏幕
-    g_main_screen = lv_scr_act();
-    lv_obj_set_style_bg_color(g_main_screen, lv_color_hex(0x2D3748), LV_PART_MAIN);
+/* 隐藏UI界面 */
+static void hide_ui(void)
+{
+    lv_obj_add_flag(menu_list, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(right_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(title_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(desc_label, LV_OBJ_FLAG_HIDDEN);
+}
 
-    // 应用列表
-    g_app_list = lv_list_create(g_main_screen);
-    lv_obj_set_size(g_app_list, 220, LV_VER_RES);
-    lv_obj_set_style_bg_color(g_app_list, lv_color_hex(0x1A202C), LV_PART_MAIN);
+/* 显示UI界面 */
+static void show_ui(void)
+{
+    lv_obj_clear_flag(menu_list, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(right_panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(title_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(desc_label, LV_OBJ_FLAG_HIDDEN);
+}
 
-    // 添加应用项
-    const AppInfo *apps = app_list_get_all();
-    for (int i = 0; i < app_list_get_count(); i++)
+/* 显示项目详细信息 */
+static void show_project_info(int idx)
+{
+    // 清除旧内容
+    if (content_label)
     {
-        lv_obj_t *item = lv_list_add_btn(g_app_list, NULL, apps[i].name);
-        lv_obj_add_style(item, &g_text_style, LV_PART_MAIN);
-        lv_obj_add_event_cb(item, ui_manager_on_list_item_selected, LV_EVENT_CLICKED, (void *)&apps[i]);
+        lv_obj_del(content_label);
+        content_label = NULL;
     }
 
-    // 详情面板
-    g_detail_panel = lv_obj_create(g_main_screen);
-    lv_obj_set_size(g_detail_panel, LV_HOR_RES - 220, LV_VER_RES);
-    lv_obj_align(g_detail_panel, LV_ALIGN_RIGHT_MID, 0, 0);
-    lv_obj_add_flag(g_detail_panel, LV_OBJ_FLAG_HIDDEN);
+    // 创建内容标签
+    content_label = lv_label_create(right_panel);
+    lv_obj_set_width(content_label, lv_pct(95));
+    lv_label_set_long_mode(content_label, LV_LABEL_LONG_WRAP);
 
-    // 图标
-    g_detail_icon = lv_img_create(g_detail_panel);
-    lv_obj_set_size(g_detail_icon, 120, 120);
-    lv_obj_align(g_detail_icon, LV_ALIGN_TOP_MID, 0, 60);
+    // 设置样式
+    static lv_style_t content_style;
+    lv_style_init(&content_style);
+    lv_style_set_text_font(&content_style, &lv_mygec_font);
+    lv_style_set_text_line_space(&content_style, 8);
+    lv_obj_add_style(content_label, &content_style, 0);
 
-    // 名称标签
-    g_detail_name_label = lv_label_create(g_detail_panel);
-    lv_obj_align_to(g_detail_name_label, g_detail_icon, LV_ALIGN_BOTTOM_MID, 0, 20);
-    lv_obj_add_style(g_detail_name_label, &g_text_style, LV_PART_MAIN);
+    // 设置文本内容
+    char buffer[512];
+    snprintf(buffer, sizeof(buffer),
+             "项目名称: %s\n\n"
+             "项目描述: %s\n\n"
+             "执行路径: %s",
+             projects[idx].name,
+             projects[idx].desc,
+             projects[idx].exec_path);
+    lv_label_set_text(content_label, buffer);
+    lv_obj_align(content_label, LV_ALIGN_TOP_LEFT, 10, 10);
 
-    // 描述标签
-    g_detail_desc_label = lv_label_create(g_detail_panel);
-    lv_obj_set_width(g_detail_desc_label, 500);
-    lv_obj_align_to(g_detail_desc_label, g_detail_name_label, LV_ALIGN_BOTTOM_MID, 0, 20);
-    lv_obj_add_style(g_detail_desc_label, &g_text_style, LV_PART_MAIN);
+    // 创建启动按钮
+    lv_obj_t *start_btn = lv_button_create(right_panel);
+    lv_obj_set_size(start_btn, 120, 50);
+    lv_obj_align(start_btn, LV_ALIGN_BOTTOM_MID, 0, -20);
 
-    // 启动按钮
-    g_launch_btn = lv_btn_create(g_detail_panel);
-    lv_obj_set_size(g_launch_btn, 180, 50);
-    lv_obj_align(g_launch_btn, LV_ALIGN_BOTTOM_MID, 0, -60);
-    lv_obj_t *btn_label = lv_label_create(g_launch_btn);
+    lv_obj_t *btn_label = lv_label_create(start_btn);
+
+    // static lv_style_t text_style;
+    // lv_style_init(&text_style);
+    // lv_style_set_text_font(&text_style, &lv_mygec_font);
+
     lv_label_set_text(btn_label, "启动");
     lv_obj_center(btn_label);
-    lv_obj_add_style(btn_label, &g_text_style, LV_PART_MAIN);
-    lv_obj_set_style_text_color(btn_label, lv_color_white(), LV_PART_MAIN);
-    lv_obj_set_style_bg_color(g_launch_btn, lv_color_hex(0x3182CE), LV_PART_MAIN);
-    lv_obj_add_event_cb(g_launch_btn, ui_manager_on_launch_btn_clicked, LV_EVENT_CLICKED, NULL);
+    lv_obj_add_event_cb(start_btn, start_btn_event_cb, LV_EVENT_CLICKED, (void *)(intptr_t)idx);
 }
 
-void ui_manager_init(void)
+/* 创建标题标签 */
+static void create_title_label(void)
 {
-    create_main_layout();
+    static lv_style_t title_style;
+    lv_style_init(&title_style);
+    lv_style_set_text_font(&title_style, &lv_mygec_font);
+    lv_style_set_text_color(&title_style, lv_color_hex(0x000000));
+    lv_style_set_text_align(&title_style, LV_TEXT_ALIGN_CENTER);
+
+    title_label = lv_label_create(lv_scr_act());
+    lv_obj_add_style(title_label, &title_style, LV_STATE_DEFAULT);
+    lv_label_set_text(title_label, "钢琴块");
+    lv_obj_align(title_label, LV_ALIGN_TOP_MID, 0, 20);
 }
 
-void ui_manager_on_list_item_selected(lv_event_t *e)
+/* 创建菜单列表 */
+static void create_menu_list(void)
 {
-    const AppInfo *app = (const AppInfo *)lv_event_get_user_data(e);
-    if (!app)
-        return;
+    menu_list = lv_list_create(lv_scr_act());
+    lv_obj_set_size(menu_list, 200, 480);
+    lv_obj_align(menu_list, LV_ALIGN_LEFT_MID, 0, 0);
+    lv_obj_set_scroll_dir(menu_list, LV_DIR_VER);
 
-    const AppInfo *apps = app_list_get_all();
-    for (int i = 0; i < app_list_get_count(); i++)
+    for (int i = 0; i < project_count; i++)
     {
-        if (&apps[i] == app)
-        {
-            g_selected_app_idx = i;
-            break;
-        }
-    }
-
-    update_detail_panel(app);
-}
-
-void ui_manager_on_launch_btn_clicked(lv_event_t *e)
-{
-    if (g_selected_app_idx == -1)
-        return;
-
-    const AppInfo *app = app_list_get_by_index(g_selected_app_idx);
-    if (!app || app->exec_path[0] == '\0')
-        return;
-
-    pid_t pid;
-    if (app_launcher_start(app->exec_path, &pid) == 0)
-    {
-        g_running_pid = pid;
-        g_app_running = true;
-        update_detail_panel(app);
-    }
-    else
-    {
-        lv_label_set_text(g_detail_desc_label, "启动应用失败");
-        printf("%s\n", app->exec_path);
+        lv_obj_t *btn = lv_list_add_btn(menu_list, LV_SYMBOL_FILE, projects[i].name);
+        lv_obj_set_height(btn, 60);
+        lv_obj_add_event_cb(btn, project_btn_event_cb, LV_EVENT_CLICKED, (void *)(intptr_t)i);
     }
 }
 
-void ui_manager_check_app_status(void)
+/* 初始化用户界面 */
+void ui_create_all(void)
 {
-    if (g_running_pid != -1)
+    project_count = launcher_scan_projects(&projects);
+
+    // 创建右侧面板
+    right_panel = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(right_panel, 600, 480);
+    lv_obj_align(right_panel, LV_ALIGN_RIGHT_MID, 0, 0);
+    lv_obj_set_scroll_dir(right_panel, LV_DIR_VER);
+
+    // 创建UI组件
+    create_title_label();
+    create_menu_list();
+
+    // 创建描述标签
+    desc_label = lv_label_create(lv_scr_act());
+    lv_label_set_text(desc_label, "请从左侧选择项目");
+    lv_obj_set_width(desc_label, 600);
+    lv_obj_align(desc_label, LV_ALIGN_TOP_MID, 0, 70);
+    lv_obj_set_style_text_align(desc_label, LV_TEXT_ALIGN_CENTER, 0);
+
+    // 创建退出按钮
+    lv_obj_t *exit_btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(exit_btn, 80, 40);
+    lv_obj_align(exit_btn, LV_ALIGN_TOP_RIGHT, -10, 10);
+    lv_obj_t *exit_label = lv_label_create(exit_btn);
+    lv_label_set_text(exit_label, "退出");
+    lv_obj_center(exit_label);
+    lv_obj_add_event_cb(exit_btn, exit_btn_event_cb, LV_EVENT_CLICKED, NULL);
+}
+
+/* 显示菜单界面 */
+void show_menu_screen(void)
+{
+    show_ui();
+    lv_label_set_text(desc_label, "请从左侧选择项目");
+    if (content_label)
     {
-        int status;
-        pid_t result = waitpid(g_running_pid, &status, WNOHANG);
-        if (result > 0)
-        {
-            g_app_running = false;
-            g_running_pid = -1;
-            if (g_selected_app_idx != -1)
-            {
-                const AppInfo *app = app_list_get_by_index(g_selected_app_idx);
-                update_detail_panel(app);
-            }
-        }
-        else if (result == -1)
-        {
-            g_app_running = false;
-            g_running_pid = -1;
-        }
+        lv_obj_del(content_label);
+        content_label = NULL;
+    }
+}
+
+/* 处理子程序退出事件 */
+void ui_on_child_exit(void)
+{
+    show_ui();
+    if (selected_index >= 0 && selected_index < project_count)
+    {
+        show_project_info(selected_index);
     }
 }
