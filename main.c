@@ -1,3 +1,9 @@
+/**
+ * @file main.c
+ * @brief 主程序入口
+ * @details 负责初始化系统、信号处理和主循环
+ */
+
 #include "ui_manager.h"
 #include "launcher.h"
 #include "utils.h"
@@ -11,10 +17,13 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-static sem_t *g_sem = NULL;
-/* signal-safe 标志：由 signal handler 设置，主循环读取并清零 */
-volatile sig_atomic_t g_child_exited_flag = 0;
+static sem_t *g_sem = NULL;                    ///< 全局信号量
+volatile sig_atomic_t g_child_exited_flag = 0; ///< 子进程退出标志
 
+/**
+ * @brief SIGCHLD信号处理函数
+ * @param signo 信号编号
+ */
 static void sigchld_handler(int signo)
 {
     int status;
@@ -29,6 +38,10 @@ static void sigchld_handler(int signo)
     }
 }
 
+/**
+ * @brief 主函数
+ * @return 程序退出状态
+ */
 int main(void)
 {
     /* 1. 初始化 LVGL（确保 lv_drivers 已正确集成）*/

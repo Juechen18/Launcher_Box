@@ -17,6 +17,7 @@ typedef struct
 {
     char name[64];          /**< 项目名称 */
     char desc[256];         /**< 项目描述 */
+    char desc_path[256];    /**< 描述文件路径 */
     char exec_path[256];    /**< 可执行文件完整路径 */
 } project_info_t;
 

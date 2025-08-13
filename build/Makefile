@@ -335,6 +335,30 @@ my_code/src/launcher.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/launcher.c.s
 .PHONY : my_code/src/launcher.c.s
 
+my_code/src/lv_my_font.o: my_code/src/lv_my_font.c.o
+.PHONY : my_code/src/lv_my_font.o
+
+# target to build an object file
+my_code/src/lv_my_font.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o
+.PHONY : my_code/src/lv_my_font.c.o
+
+my_code/src/lv_my_font.i: my_code/src/lv_my_font.c.i
+.PHONY : my_code/src/lv_my_font.i
+
+# target to preprocess a source file
+my_code/src/lv_my_font.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.i
+.PHONY : my_code/src/lv_my_font.c.i
+
+my_code/src/lv_my_font.s: my_code/src/lv_my_font.c.s
+.PHONY : my_code/src/lv_my_font.s
+
+# target to generate assembly for a file
+my_code/src/lv_my_font.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.s
+.PHONY : my_code/src/lv_my_font.c.s
+
 my_code/src/ui_manager.o: my_code/src/ui_manager.c.o
 .PHONY : my_code/src/ui_manager.o
 
@@ -358,30 +382,6 @@ my_code/src/ui_manager.s: my_code/src/ui_manager.c.s
 my_code/src/ui_manager.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/ui_manager.c.s
 .PHONY : my_code/src/ui_manager.c.s
-
-my_code/src/utils.o: my_code/src/utils.c.o
-.PHONY : my_code/src/utils.o
-
-# target to build an object file
-my_code/src/utils.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/utils.c.o
-.PHONY : my_code/src/utils.c.o
-
-my_code/src/utils.i: my_code/src/utils.c.i
-.PHONY : my_code/src/utils.i
-
-# target to preprocess a source file
-my_code/src/utils.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/utils.c.i
-.PHONY : my_code/src/utils.c.i
-
-my_code/src/utils.s: my_code/src/utils.c.s
-.PHONY : my_code/src/utils.s
-
-# target to generate assembly for a file
-my_code/src/utils.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/launcher.dir/build.make CMakeFiles/launcher.dir/my_code/src/utils.c.s
-.PHONY : my_code/src/utils.c.s
 
 # Help Target
 help:
@@ -413,12 +413,12 @@ help:
 	@echo "... my_code/src/launcher.o"
 	@echo "... my_code/src/launcher.i"
 	@echo "... my_code/src/launcher.s"
+	@echo "... my_code/src/lv_my_font.o"
+	@echo "... my_code/src/lv_my_font.i"
+	@echo "... my_code/src/lv_my_font.s"
 	@echo "... my_code/src/ui_manager.o"
 	@echo "... my_code/src/ui_manager.i"
 	@echo "... my_code/src/ui_manager.s"
-	@echo "... my_code/src/utils.o"
-	@echo "... my_code/src/utils.i"
-	@echo "... my_code/src/utils.s"
 .PHONY : help
 
 

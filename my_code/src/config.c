@@ -1,6 +1,7 @@
 /**
  * @file config.c
  * @brief 项目配置管理实现
+ * @details 提供项目路径构建、文件检查等配置相关功能
  */
 
 #include "my_code/inc/config.h"
@@ -13,6 +14,10 @@
 #include <errno.h>
 #include <stdlib.h>
 
+/**
+ * @brief 获取项目目录路径
+ * @return 返回项目目录路径字符串
+ */
 const char *config_get_projects_dir(void)
 {
     return PROJECTS_DIR;
@@ -40,14 +45,39 @@ static int safe_snprintf(char *out, size_t outsz, const char *fmt, ...)
     return 0;
 }
 
+/**
+ * @brief 构建项目可执行文件路径
+ * @param proj 项目名称
+ * @param out 输出缓冲区
+ * @param outsz 缓冲区大小
+ * @return 成功返回0，失败返回-1
+ */
 int config_build_project_exec_path(const char *proj, char *out, size_t outsz)
 {
     if (!proj || !out)
         return -1;
-    return safe_snprintf(out, outsz, "%s/%s/%s",
-                         PROJECTS_DIR, proj, PROJECT_EXEC_FILE);
+    return safe_snprintf(out, outsz, "%s/%s", PROJECTS_DIR, proj);
 }
 
+/**
+ * @brief 构建项目描述文件路径
+ * @param proj 项目名称
+ * @param out 输出缓冲区
+ * @param outsz 缓冲区大小
+ * @return 成功返回0，失败返回-1
+ */
+int config_build_project_desc_path(const char *proj, char *out, size_t outsz)
+{
+    if (!proj || !out)
+        return -1;
+    return safe_snprintf(out, outsz, "%s/%s/desc.txt", PROJECTS_DIR, proj);
+}
+
+/**
+ * @brief 检查项目可执行文件是否存在
+ * @param proj 项目名称
+ * @return 存在返回1，不存在返回0
+ */
 int config_project_exec_exists(const char *proj)
 {
     if (!proj)

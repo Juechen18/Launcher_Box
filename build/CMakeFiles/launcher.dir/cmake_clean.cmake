@@ -9,10 +9,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/launcher.dir/my_code/src/config.c.o.d"
   "CMakeFiles/launcher.dir/my_code/src/launcher.c.o"
   "CMakeFiles/launcher.dir/my_code/src/launcher.c.o.d"
+  "CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o"
+  "CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o.d"
   "CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o"
   "CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o.d"
-  "CMakeFiles/launcher.dir/my_code/src/utils.c.o"
-  "CMakeFiles/launcher.dir/my_code/src/utils.c.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

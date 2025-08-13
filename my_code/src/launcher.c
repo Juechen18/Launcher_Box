@@ -1,9 +1,8 @@
 /**
  * @file launcher.c
  * @brief 项目启动器核心功能实现
- *
- * 本模块负责扫描项目目录、管理项目列表以及启动项目进程。
- * 使用信号量(g_sem)控制并发启动，防止资源竞争。
+ * @details 本模块负责扫描项目目录、管理项目列表以及启动项目进程。
+ *          使用信号量(g_sem)控制并发启动，防止资源竞争。
  */
 
 #include "launcher.h"
@@ -62,8 +61,28 @@ int launcher_scan_projects(project_info_t **list)
                 // 构建完整路径
                 config_build_project_exec_path(entry->d_name, arr[count].exec_path, sizeof(arr[count].exec_path));
 
-                // 设置默认描述
-                snprintf(arr[count].desc, sizeof(arr[count].desc), "项目: %s", entry->d_name);
+                // 设置描述路径
+                config_build_project_desc_path(entry->d_name, arr[count].desc_path, sizeof(arr[count].desc_path));
+                // 设置描述
+                FILE *fd = fopen(arr[count].desc_path, "r");
+                if (fd != NULL)
+                {
+                    // 读取文件内容
+                    char file_content[sizeof(arr[count].desc) - 50]; // 留出空间给前缀和其他内容
+                    size_t bytes_read = fread(file_content, 1, sizeof(file_content) - 1, fd);
+                    file_content[bytes_read] = '\0'; // 确保字符串终止
+
+                    // 格式化到 desc 中
+                    snprintf(arr[count].desc, sizeof(arr[count].desc), "%s", file_content);
+                }
+                else
+                {
+                    // 如果文件打开失败，只写入项目名称
+                    snprintf(arr[count].desc, sizeof(arr[count].desc), "项目: %s", entry->d_name);
+                    perror("desc error");
+                }
+
+                fclose(fd);
 
                 count++;
             }
@@ -79,13 +98,11 @@ int launcher_scan_projects(project_info_t **list)
  * @param[in] exec_path 项目可执行文件的完整路径
  * @note 使用fork()+execl()启动新进程
  * @warning 需要先通过launcher_set_semaphore()设置信号量
- *
  * @details 启动流程:
  * 1. 获取信号量(g_sem)
  * 2. 创建子进程
  * 3. 在子进程中执行目标程序
  * 4. 错误处理并释放信号量
- *
  * @par 并发控制:
  * 使用信号量确保同一时间只有一个项目启动过程
  */
@@ -102,7 +119,9 @@ void launcher_start_project(const char *exec_path)
     {
         /* 子进程 */
         // 3. 在子进程中执行目标程序
-        execl(exec_path, exec_path, NULL);
+        chdir(exec_path);
+        execl("./main", NULL);
+
         perror("execl");
         exit(1);
     }

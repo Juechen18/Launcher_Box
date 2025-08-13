@@ -31,6 +31,15 @@ const char *config_get_projects_dir(void);
 int config_build_project_exec_path(const char *proj, char *out, size_t outsz);
 
 /**
+ * @brief 构建项目描述文件路径
+ * @param proj 项目名称
+ * @param out 输出路径缓冲区
+ * @param outsz 缓冲区大小
+ * @return 成功返回0，失败返回-1
+ */
+int config_build_project_desc_path(const char *proj, char *out, size_t outsz);
+
+/**
  * @brief 检查项目可执行文件是否存在并可执行
  * @param proj 项目名称
  * @return 存在且可执行返回1，否则返回0

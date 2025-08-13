@@ -128,10 +128,24 @@ CMakeFiles/launcher.dir/my_code/src/launcher.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/launcher.dir/my_code/src/launcher.c.s"
 	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/launcher.c -o CMakeFiles/launcher.dir/my_code/src/launcher.c.s
 
+CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o: CMakeFiles/launcher.dir/flags.make
+CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o: /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/lv_my_font.c
+CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o: CMakeFiles/launcher.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/GitHub/Launcher_Box/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o"
+	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o -MF CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o.d -o CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o -c /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/lv_my_font.c
+
+CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.i"
+	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/lv_my_font.c > CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.i
+
+CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.s"
+	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/lv_my_font.c -o CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.s
+
 CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o: CMakeFiles/launcher.dir/flags.make
 CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o: /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/ui_manager.c
 CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o: CMakeFiles/launcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/GitHub/Launcher_Box/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/GitHub/Launcher_Box/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o"
 	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o -MF CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o.d -o CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o -c /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/ui_manager.c
 
 CMakeFiles/launcher.dir/my_code/src/ui_manager.c.i: cmake_force
@@ -142,28 +156,14 @@ CMakeFiles/launcher.dir/my_code/src/ui_manager.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/launcher.dir/my_code/src/ui_manager.c.s"
 	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/ui_manager.c -o CMakeFiles/launcher.dir/my_code/src/ui_manager.c.s
 
-CMakeFiles/launcher.dir/my_code/src/utils.c.o: CMakeFiles/launcher.dir/flags.make
-CMakeFiles/launcher.dir/my_code/src/utils.c.o: /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/utils.c
-CMakeFiles/launcher.dir/my_code/src/utils.c.o: CMakeFiles/launcher.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/GitHub/Launcher_Box/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/launcher.dir/my_code/src/utils.c.o"
-	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/launcher.dir/my_code/src/utils.c.o -MF CMakeFiles/launcher.dir/my_code/src/utils.c.o.d -o CMakeFiles/launcher.dir/my_code/src/utils.c.o -c /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/utils.c
-
-CMakeFiles/launcher.dir/my_code/src/utils.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/launcher.dir/my_code/src/utils.c.i"
-	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/utils.c > CMakeFiles/launcher.dir/my_code/src/utils.c.i
-
-CMakeFiles/launcher.dir/my_code/src/utils.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/launcher.dir/my_code/src/utils.c.s"
-	/usr/local/arm/6.5.0/bin/arm-linux-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/GitHub/Launcher_Box/my_code/src/utils.c -o CMakeFiles/launcher.dir/my_code/src/utils.c.s
-
 # Object files for target launcher
 launcher_OBJECTS = \
 "CMakeFiles/launcher.dir/main.c.o" \
 "CMakeFiles/launcher.dir/mouse_cursor_icon.c.o" \
 "CMakeFiles/launcher.dir/my_code/src/config.c.o" \
 "CMakeFiles/launcher.dir/my_code/src/launcher.c.o" \
-"CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o" \
-"CMakeFiles/launcher.dir/my_code/src/utils.c.o"
+"CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o" \
+"CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o"
 
 # External object files for target launcher
 launcher_EXTERNAL_OBJECTS =
@@ -172,8 +172,8 @@ launcher_EXTERNAL_OBJECTS =
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/mouse_cursor_icon.c.o
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/config.c.o
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/launcher.c.o
+/mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/lv_my_font.c.o
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/ui_manager.c.o
-/mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/my_code/src/utils.c.o
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/build.make
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: lib/liblvgl.a
 /mnt/hgfs/share/GitHub/Launcher_Box/bin/launcher: CMakeFiles/launcher.dir/link.txt
