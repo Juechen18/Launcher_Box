@@ -6,7 +6,6 @@
 
 #include "ui_manager.h"
 #include "launcher.h"
-#include "utils.h"
 #include "config.h"
 #include <unistd.h>
 #include <signal.h>
