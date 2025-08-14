@@ -30,7 +30,7 @@ static void sigchld_handler(int signo)
     /* 回收所有已退出的子进程 */
     while ((pid = waitpid(-1, &status, WNOHANG)) > 0)
     {
-        /* sem_post 是 POSIX 定义的 async-signal-safe，可以在 handler 中调用 */
+        // V操作
         if (g_sem)
             sem_post(g_sem);
         g_child_exited_flag = 1; /* 在主循环中处理 UI 恢复 */

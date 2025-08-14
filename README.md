@@ -14,7 +14,7 @@ Launcher Box 是 GEC6818 嵌入式平台基于LVGL的应用启动器，支持多
 
 ## 流程图
 
-###### ![box1](assets/box1.png)
+###### <img src="assets/box.png" alt="box1" style="zoom:15%;" />
 
 ## 安装说明
 
@@ -55,7 +55,7 @@ Launcher Box 是 GEC6818 嵌入式平台基于LVGL的应用启动器，支持多
 
 1. 确保项目目录结构正确：
 
-   ![PixPin_2025-08-13_21-16-25](assets/PixPin_2025-08-13_21-16-25.png)
+   <img src="assets/PixPin_2025-08-13_21-16-25.png" alt="PixPin_2025-08-13_21-16-25" style="zoom: 50%;" />
 
 
 2. 运行 Launcher Box：
